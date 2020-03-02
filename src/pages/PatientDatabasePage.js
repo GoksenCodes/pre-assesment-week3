@@ -1,3 +1,9 @@
 import React from "react";
 
-export default function PatientDatabasePage() {}
+export default function PatientDatabasePage() {
+  return (
+    <div>
+      <p>Patient Database</p>;
+    </div>
+  );
+}
