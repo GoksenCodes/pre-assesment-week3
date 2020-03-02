@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ContactInfo from "../components/ContactInfo";
 import axios from "axios";
+import Doctor from "../components/Doctor";
 
 export default function OnDutyPage() {
   const [status, setStatus] = useState("");
@@ -12,12 +13,15 @@ export default function OnDutyPage() {
     const response = await axios.get(
       "https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/doctors"
     );
-    console.log(response);
-    setDoctors(response.data);
-    console.log(response.data);
 
-    search();
+    setDoctors(response.data);
+
+    console.log(response.data);
   };
+
+  useEffect(() => {
+    search();
+  }, []);
 
   return (
     <div>
@@ -27,7 +31,12 @@ export default function OnDutyPage() {
           <th>Availability</th>
         </tr>
         <tr>
-          <td>Doctor X</td>
+          {doctors.map(doctor => (
+            <td>
+              key={doctor.id}
+              {doctor.doctor}
+            </td>
+          ))}
           <td>available</td>
         </tr>
       </table>
@@ -35,5 +44,3 @@ export default function OnDutyPage() {
     </div>
   );
 }
-
-//{doctors.map(doctor => { <Doctor key={doctor.id} name={doctor.doctor}/> )})}
