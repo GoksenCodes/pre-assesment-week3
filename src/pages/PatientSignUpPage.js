@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 
 export default function PatientSignUpPage() {
-  // const [data, setData] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target.value);
+    setName(event.target.value);
+    console.log(name);
   }
 
   return (
@@ -13,16 +18,16 @@ export default function PatientSignUpPage() {
       <h3>Patient Signup</h3>
       <form onSubmit={handleSubmit}>
         <label>Name</label>
-        <input />
+        <input id="username" name="username" type="text" />
         <br />
         <label>Surname</label>
-        <input />
+        <input id="name" name="surname" type="text" />
         <br />
         <label>Email</label>
-        <input />
+        <input id="email" name="email" type="email" />
         <br />
         <label>Phone</label>
-        <input />
+        <input id="phhone" name="phone" type="number" />
         <br />
         <label>Gender</label>
         <select>
@@ -32,6 +37,7 @@ export default function PatientSignUpPage() {
         </select>
         <br />
         <label>Birthday</label>
+        <input type="date" />
         <br />
         <input type="submit" />
       </form>
