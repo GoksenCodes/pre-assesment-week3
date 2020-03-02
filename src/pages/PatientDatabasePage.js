@@ -27,10 +27,12 @@ export default function PatientDatabasePage() {
           <Patient
             key={patient.id}
             id={patient.id}
-            name={patient.name}
-            surname={patient.surname}
-            birthday={patient.birthday}
+            name={patient.firstName}
+            surname={patient.lastName}
+            gender={patient.gender}
+            birthday={patient.dateOfBirth}
             prescriptions={patient.prescriptions}
+            doctor={patient.doctorId}
           />
         );
       })}

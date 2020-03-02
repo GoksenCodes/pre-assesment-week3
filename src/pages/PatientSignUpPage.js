@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 
 export default function PatientSignUpPage() {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
+  const [values, setValues] = useState({
+    // we use name HTML attribute as a uniq key to construct our state object, we can also use id for this as well
+    username: "",
+    surname: "",
+    email: "",
+    phone: "",
+    gender: "",
+    dateOfBirth: ""
+  });
+
+  function handleChange(event) {
+    //this function runs on every key press
+    // console.log(event.target);
+    // console.log(event.target.value);
+    // console.log(event.target.name);
+    const name = event.target.name; // in order to understand which input(email/phone/name..) we define name to be able to select correct key in  our state
+    const value = event.target.value;
+    setValues({ ...values, [name]: value });
+  }
 
   function handleSubmit(event) {
+    //this functions runs only if submit ic clicked
     event.preventDefault();
-    setName(event.target.value);
-    console.log(name);
+    console.log(values); // this is teh update version of values , it is updated by setValues in the above function
   }
 
   return (
@@ -18,26 +32,36 @@ export default function PatientSignUpPage() {
       <h3>Patient Signup</h3>
       <form onSubmit={handleSubmit}>
         <label>Name</label>
-        <input id="username" name="username" type="text" />
+        <input
+          onChange={handleChange}
+          id="username"
+          name="username"
+          type="text"
+        />
         <br />
         <label>Surname</label>
-        <input id="name" name="surname" type="text" />
+        <input onChange={handleChange} id="name" name="surname" type="text" />
         <br />
         <label>Email</label>
-        <input id="email" name="email" type="email" />
+        <input onChange={handleChange} id="email" name="email" type="email" />
         <br />
         <label>Phone</label>
-        <input id="phhone" name="phone" type="number" />
+        <input
+          onChange={handleChange}
+          id="phone"
+          name="phone"
+          type="phonenumber"
+        />
         <br />
         <label>Gender</label>
-        <select>
+        <select onChange={handleChange} name="gender">
           <option>select gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
         <br />
         <label>Birthday</label>
-        <input type="date" />
+        <input onChange={handleChange} name="dateOfBirth" type="date" />
         <br />
         <input type="submit" />
       </form>

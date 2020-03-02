@@ -30,15 +30,12 @@ export default function OnDutyPage() {
           <th>Doctor</th>
           <th>Availability</th>
         </tr>
-        <tr>
-          {doctors.map(doctor => (
-            <td>
-              key={doctor.id}
-              {doctor.doctor}
-            </td>
-          ))}
-          <td>available</td>
-        </tr>
+        {doctors.map(doctor => (
+          <tr>
+            <td>{doctor.doctor}</td>
+            {doctor.onDuty === true ? <td> on duty </td> : <td>off duty</td>}
+          </tr>
+        ))}
       </table>
       <ContactInfo />
     </div>

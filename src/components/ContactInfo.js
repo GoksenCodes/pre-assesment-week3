@@ -10,7 +10,7 @@ export default function ContactInfo() {
   if (today >= 8 && today <= 17) {
     status = "open";
   } else {
-    status = "close";
+    status = "closed";
   }
 
   return (
