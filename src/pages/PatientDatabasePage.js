@@ -8,22 +8,27 @@ export default function PatientDatabasePage() {
   const [doctors, setDoctors] = useState([]);
 
   function handleChange(event) {
-    const search = async () => {
+    const doctorId = event.target.value;
+
+    const getDoctor = async doctorId => {
       const response = await axios.get(
         "https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/patients"
       );
       const patientList = response.data;
-
+      console.log(doctorId);
       const filteredPatients = patientList.filter(patient => {
         if (patient.doctorId == doctorId) {
           return patient;
         }
       });
-      console.log(filteredPatients); //how to display it
+      console.log(filteredPatients);
+      setPatients(filteredPatients);
     };
-    const doctorId = event.target.value;
-    search();
+    getDoctor(doctorId);
     // console.log(response.data);
+
+    // sortedPatients = [...patients].sort(SortByLastName);
+    // setPatients(sortedPatients);
   }
 
   // useEffect(() => {
@@ -36,33 +41,40 @@ export default function PatientDatabasePage() {
     );
 
     setDoctors(response.data);
-    console.log(response.data);
+    // console.log(response.data);
+  };
+
+  const SortByLastName = (filteredPatientA, filteredPatientB) => {
+    //it needs to sort after fetching data, fetchinda data takes time
+    return filteredPatientA.lastName.localeCompare(filteredPatientB.lastName);
   };
 
   useEffect(() => {
     getDoctors();
   }, []);
 
+  const sortedPatients = patients.length // we are checking if the fetching is completed here.
+    ? [...patients].sort(SortByLastName)
+    : [];
   return (
     <div>
       <h4>Patient Database</h4>
-      <select onChange={handleChange}>
-        <option>Choose a doctor</option>
+      <select onChange={handleChange} name="doctors">
+        <option value={99}>Choose a doctor</option>
         {doctors.map(doctor => (
           <option value={doctor.id}>{doctor.doctor}</option>
         ))}
       </select>
-      {patients.map(patient => {
+      {sortedPatients.map(patient => {
         return (
           <Patient
             key={patient.id}
             id={patient.id}
-            name={patient.firstName}
-            surname={patient.lastName}
+            firstName={patient.firstName}
+            lastName={patient.lastName}
             gender={patient.gender}
-            birthday={patient.dateOfBirth}
+            dateOfBirth={patient.dateOfBirth}
             prescriptions={patient.prescriptions}
-            doctor={patient.doctorId}
           />
         );
       })}

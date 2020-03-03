@@ -37,6 +37,7 @@ export default function PatientSignUpPage() {
           id="username"
           name="username"
           type="text"
+          value={values.username}
         />
         <br />
         <label>Surname</label>
