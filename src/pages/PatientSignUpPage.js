@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function PatientSignUpPage() {
   const [values, setValues] = useState({
-    // we use name HTML attribute as a uniq key to construct our state object, we can also use id for this as well
+    // we use name HTML attribute as a unique key to construct our state object, we can also use id for this as well
     username: "",
     surname: "",
     email: "",
@@ -10,6 +10,7 @@ export default function PatientSignUpPage() {
     gender: "",
     dateOfBirth: ""
   });
+  const [submit, setSubmit] = useState("");
 
   function handleChange(event) {
     //this function runs on every key press
@@ -25,6 +26,7 @@ export default function PatientSignUpPage() {
     //this functions runs only if submit ic clicked
     event.preventDefault();
     console.log(values); // this is teh update version of values , it is updated by setValues in the above function
+    setSubmit("Your data has been succesfully submitted");
   }
 
   return (
@@ -66,6 +68,7 @@ export default function PatientSignUpPage() {
         <br />
         <input type="submit" />
       </form>
+      <div>{submit}</div>
     </div>
   );
 }

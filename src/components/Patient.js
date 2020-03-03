@@ -19,7 +19,7 @@ export default function Patient(props) {
         <li>surname: {props.lastName}</li>
         <li>birthday:{props.dateOfBirth}</li>
         <button onClick={handleClick}>See details</button>
-        {show && ( //state is now true and we are saying let's bring this text
+        {show && ( //when state is true it checks thhe right side of && and if it's tru it executes it. If state is false it wouldn't check the right side of && it stops.
           <div>
             <li>gender: {props.gender}</li>
             <li>phone number: {props.phoneNumber}</li>

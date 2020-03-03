@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Patient from "../components/Patient";
 import axios from "axios";
-import Doctor from "../components/Doctor";
 
 export default function PatientDatabasePage() {
   const [patients, setPatients] = useState([]);
@@ -19,6 +18,10 @@ export default function PatientDatabasePage() {
       const filteredPatients = patientList.filter(patient => {
         if (patient.doctorId == doctorId) {
           return patient;
+        } else if (doctorId == 99) {
+          return true;
+        } else {
+          return false;
         }
       });
       console.log(filteredPatients);
@@ -56,19 +59,22 @@ export default function PatientDatabasePage() {
   const sortedPatients = patients.length // we are checking if the fetching is completed here.
     ? [...patients].sort(SortByLastName)
     : [];
+
   return (
     <div>
       <h4>Patient Database</h4>
       <select onChange={handleChange} name="doctors">
-        <option value={99}>Choose a doctor</option>
-        {doctors.map(doctor => (
-          <option value={doctor.id}>{doctor.doctor}</option>
+        <option value={99}>All Doctors</option>
+        {doctors.map((doctor, index) => (
+          <option key={index} value={doctor.id}>
+            {doctor.doctor}
+          </option>
         ))}
       </select>
-      {sortedPatients.map(patient => {
+      {sortedPatients.map((patient, index) => {
         return (
           <Patient
-            key={patient.id}
+            key={index} // STILL GET KEY WARNING!
             id={patient.id}
             firstName={patient.firstName}
             lastName={patient.lastName}
