@@ -19,8 +19,7 @@ export default function ContactInfo() {
         We are : <strong>{status}</strong>
       </p>
       <p>To make an appointment</p>
-      <br />
-      call: 020 555 5555
+      <p>call: 020 555 5555</p>
     </div>
   );
 }

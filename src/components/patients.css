@@ -1,3 +1,6 @@
-.invisible {
-  display: none;
+li {
+  list-style: none;
+}
+.list {
+  padding-bottom: 50px;
 }

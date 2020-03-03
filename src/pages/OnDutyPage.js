@@ -32,11 +32,13 @@ export default function OnDutyPage() {
   } else {
     return (
       <div>
-        <table>
-          <tr>
-            <th>Doctor</th>
-            <th>Availability</th>
-          </tr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Doctor</th>
+              <th scope="col">Availability</th>
+            </tr>
+          </thead>
           {doctors.map((doctor, index) => (
             <tr key={index}>
               <td>{doctor.doctor}</td>
@@ -44,7 +46,9 @@ export default function OnDutyPage() {
             </tr>
           ))}
         </table>
-        <ContactInfo />
+        <div>
+          <ContactInfo />
+        </div>
       </div>
     );
   }

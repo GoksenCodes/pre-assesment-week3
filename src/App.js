@@ -10,13 +10,16 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/doctorSchedule" component={OnDutyPage} />
-        <Route path="/patientSignUp" component={PatientSignUpPage} />
-        <Route path="/patientDatabase" component={PatientDatabasePage} />
-      </Switch>
+      <div className="container">
+        <NavBar />
+        <h2>Welcome to AMS GPs</h2>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/doctorSchedule" component={OnDutyPage} />
+          <Route path="/patientSignUp" component={PatientSignUpPage} />
+          <Route path="/patientDatabase" component={PatientDatabasePage} />
+        </Switch>
+      </div>
     </div>
   );
 }

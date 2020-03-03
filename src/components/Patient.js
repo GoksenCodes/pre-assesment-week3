@@ -12,19 +12,19 @@ export default function Patient(props) {
   };
 
   return (
-    <div>
-      <ul>
-        <li>id: {props.id}</li>
-        <li>name: {props.firstName}</li>
-        <li>surname: {props.lastName}</li>
-        <li>birthday:{props.dateOfBirth}</li>
+    <div className="list">
+      <ul class="list-group">
+        <li class="list-group-item">id: {props.id}</li>
+        <li class="list-group-item">name: {props.firstName}</li>
+        <li class="list-group-item">surname: {props.lastName}</li>
+        <li class="list-group-item">birthday:{props.dateOfBirth}</li>
         <button onClick={handleClick}>See details</button>
         {show && ( //when state is true it checks thhe right side of && and if it's tru it executes it. If state is false it wouldn't check the right side of && it stops.
           <div>
-            <li>gender: {props.gender}</li>
-            <li>phone number: {props.phoneNumber}</li>
-            <li>email: {props.email}</li>
-            <li>precriptions: {props.prescriptions}</li>
+            <li class="list-group-item">gender: {props.gender}</li>
+            <li class="list-group-item">phone number: {props.phoneNumber}</li>
+            <li class="list-group-item">email: {props.email}</li>
+            <li class="list-group-item">precriptions: {props.prescriptions}</li>
           </div>
         )}
       </ul>
