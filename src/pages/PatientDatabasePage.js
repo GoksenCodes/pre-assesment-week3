@@ -5,45 +5,30 @@ import axios from "axios";
 export default function PatientDatabasePage() {
   const [patients, setPatients] = useState([]);
   const [doctors, setDoctors] = useState([]);
+  const [selectedDoctorId, setSelectedDoctorId] = useState(99);
 
-  function handleChange(event) {
+  useEffect(() => {
+    getDoctors();
+    getPatients();
+  }, []);
+
+  const handleChange = event => {
     const doctorId = event.target.value;
-
-    const getDoctor = async doctorId => {
-      const response = await axios.get(
-        "https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/patients"
-      );
-      const patientList = response.data;
-      console.log(doctorId);
-      const filteredPatients = patientList.filter(patient => {
-        if (patient.doctorId == doctorId) {
-          return patient;
-        } else if (doctorId == 99) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      console.log(filteredPatients);
-      setPatients(filteredPatients);
-    };
-    getDoctor(doctorId);
-    // console.log(response.data);
-
-    // sortedPatients = [...patients].sort(SortByLastName);
-    // setPatients(sortedPatients);
-  }
-
-  // useEffect(() => {
-  //   search();
-  // }, []);
+    setSelectedDoctorId(doctorId);
+  };
 
   const getDoctors = async () => {
     const response = await axios.get(
       "https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/doctors"
     );
-
     setDoctors(response.data);
+    // console.log(response.data);
+  };
+  const getPatients = async () => {
+    const response = await axios.get(
+      "https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/patients"
+    );
+    setPatients(response.data);
     // console.log(response.data);
   };
 
@@ -52,13 +37,14 @@ export default function PatientDatabasePage() {
     return filteredPatientA.lastName.localeCompare(filteredPatientB.lastName);
   };
 
-  useEffect(() => {
-    getDoctors();
-  }, []);
-
   const sortedPatients = patients.length // we are checking if the fetching is completed here.
     ? [...patients].sort(SortByLastName)
     : [];
+
+  const filteredPatients =
+    parseInt(selectedDoctorId) === 99
+      ? sortedPatients
+      : sortedPatients.filter(patient => patient.doctorId == selectedDoctorId);
 
   return (
     <div>
@@ -71,7 +57,7 @@ export default function PatientDatabasePage() {
           </option>
         ))}
       </select>
-      {sortedPatients.map((patient, index) => {
+      {filteredPatients.map((patient, index) => {
         return (
           <Patient
             key={index} // STILL GET KEY WARNING!
